@@ -1,0 +1,9 @@
+title: Awesome Buttons Showcase
+description: A collection of visually striking and interactive buttons
+baseurl: "/BUTTONS"
+url: "https://tmhsdigital.github.io"
+theme: minima
+
+plugins:
+- jekyll-feed
+- jekyll-seo-tag
