@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk Glitch Button</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #0f0f1f;
+            font-family: 'Courier New', monospace;
+        }
+
+        .glitch-button {
+            position: relative;
+            padding: 25px 50px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            background-color: transparent;
+            border: 2px solid #0ff;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s;
+            text-shadow: 
+                0 0 5px #0ff,
+                0 0 10px #0ff,
+                0 0 20px #0ff;
+            box-shadow: 
+                0 0 5px #0ff,
+                0 0 10px #0ff,
+                0 0 20px #0ff,
+                0 0 40px #0ff;
+        }
+
+        .glitch-button::before,
+        .glitch-button::after {
+            content: 'CLICK ME';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #0f0f1f;
+            color: #0ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+            transform: translateX(100%);
+        }
+
+        .glitch-button::before {
+            left: -2px;
+            text-shadow: -2px 0 #ff00de;
+            clip-path: inset(0 100% 0 0);
+        }
+
+        .glitch-button::after {
+            left: 2px;
+            text-shadow: 2px 0 #00ff00;
+            clip-path: inset(0 0 0 100%);
+        }
+
+        .glitch-button:hover::before {
+            transform: translateX(-100%);
+            clip-path: inset(0 0 0 0);
+        }
+
+        .glitch-button:hover::after {
+            transform: translateX(100%);
+            clip-path: inset(0 0 0 0);
+        }
+
+        .glitch-button:hover {
+            color: #0f0f1f;
+            background-color: #0ff;
+            text-shadow: none;
+        }
+
+        @keyframes glitch {
+            0% {
+                clip-path: inset(80% 0 0 0);
+                transform: translate(-10px, -3px);
+            }
+            10% {
+                clip-path: inset(10% 0 85% 0);
+                transform: translate(10px, 3px);
+            }
+            20% {
+                clip-path: inset(80% 0 0 0);
+                transform: translate(-10px, 3px);
+            }
+            30% {
+                clip-path: inset(10% 0 85% 0);
+                transform: translate(0px, -3px);
+            }
+            40% {
+                clip-path: inset(50% 0 30% 0);
+                transform: translate(-10px, 1px);
+            }
+            50% {
+                clip-path: inset(40% 0 60% 0);
+                transform: translate(10px, -1px);
+            }
+            60% {
+                clip-path: inset(20% 0 80% 0);
+                transform: translate(-10px, 3px);
+            }
+            70% {
+                clip-path: inset(60% 0 20% 0);
+                transform: translate(10px, -3px);
+            }
+            80% {
+                clip-path: inset(80% 0 40% 0);
+                transform: translate(-10px, -1px);
+            }
+            90% {
+                clip-path: inset(16% 0 95% 0);
+                transform: translate(10px, 3px);
+            }
+            100% {
+                clip-path: inset(40% 0 50% 0);
+                transform: translate(-10px, 1px);
+            }
+        }
+
+        .glitch-button:hover::before,
+        .glitch-button:hover::after {
+            animation: glitch 2s infinite linear alternate-reverse;
+        }
+    </style>
+</head>
+<body>
+    <button class="glitch-button">Click Me</button>
+</body>
+</html>

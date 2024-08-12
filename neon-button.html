@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Glowing Button</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1a1a1a;
+            font-family: Arial, sans-serif;
+        }
+
+        .neon-button {
+            font-size: 24px;
+            color: #fff;
+            background-color: transparent;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .neon-button::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background-color: #fff;
+            z-index: -1;
+            filter: blur(5px);
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .neon-button:hover {
+            color: #1a1a1a;
+            text-shadow: 0 0 5px #fff;
+        }
+
+        .neon-button:hover::before {
+            opacity: 1;
+        }
+
+        .neon-button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <button class="neon-button">Click me!</button>
+</body>
+</html>

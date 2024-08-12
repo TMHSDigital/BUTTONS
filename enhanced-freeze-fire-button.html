@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Freeze and Fire Button</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1a1a1a;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .elemental-button {
+            position: relative;
+            padding: 20px 40px;
+            font-size: 24px;
+            color: #fff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .elemental-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(135deg, rgba(255,255,255,0.4) 25%, transparent 25%) -50px 0,
+                linear-gradient(225deg, rgba(255,255,255,0.4) 25%, transparent 25%) -50px 0,
+                linear-gradient(315deg, rgba(255,255,255,0.4) 25%, transparent 25%),
+                linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%);
+            background-size: 100px 100px;
+            background-color: rgba(200, 230, 255, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            filter: blur(1px);
+        }
+
+        .elemental-button:hover::before {
+            opacity: 1;
+            animation: iceGrow 0.5s forwards;
+        }
+
+        @keyframes iceGrow {
+            0% { clip-path: inset(100% 100% 0 0); }
+            100% { clip-path: inset(0 0 0 0); }
+        }
+
+        .elemental-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%) 0 0,
+                radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%) 8px 8px;
+            background-size: 16px 16px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .elemental-button:hover::after {
+            opacity: 1;
+            animation: snowfall 20s linear infinite;
+        }
+
+        @keyframes snowfall {
+            0% { background-position: 0 0, 8px 8px; }
+            100% { background-position: 0 200px, 8px 208px; }
+        }
+
+        #fireCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <button class="elemental-button">Elemental</button>
+    <canvas id="fireCanvas"></canvas>
+
+    <script>
+        const button = document.querySelector('.elemental-button');
+        const canvas = document.getElementById('fireCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+
+        class FireParticle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 2 + 1;
+                this.speedY = Math.random() * -1 - 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.color = `hsl(${Math.random() * 30 + 10}, 100%, 50%)`;
+                this.life = Math.random() * 0.5 + 0.5;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.size -= 0.02;
+                this.life -= 0.02;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.life;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        let particles = [];
+
+        function createFireEffect(x, y) {
+            for (let i = 0; i < 100; i++) {
+                particles.push(new FireParticle(x + (Math.random() - 0.5) * 20, y));
+            }
+        }
+
+        function animateFire() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((particle, index) => {
+                if (particle.life > 0) {
+                    particle.update();
+                    particle.draw();
+                } else {
+                    particles.splice(index, 1);
+                }
+            });
+            ctx.globalAlpha = 1;
+            requestAnimationFrame(animateFire);
+        }
+
+        button.addEventListener('click', (e) => {
+            const rect = button.getBoundingClientRect();
+            createFireEffect(e.clientX, rect.bottom);
+        });
+
+        animateFire();
+    </script>
+</body>
+</html>
