@@ -17,16 +17,103 @@ button {
   transition: all 0.3s ease;
 }
 
-/* Add specific styles for each button type here */
-.3d-flip-button { /* styles */ }
-.animated-button { /* styles */ }
-.enhanced-freeze-fire-button { /* styles */ }
-.freeze-fire-button { /* styles */ }
-.glitch-button { /* styles */ }
-.glitch-button2 { /* styles */ }
-.liquid-button { /* styles */ }
-.neon-button { /* styles */ }
-.neon-flicker-button-push { /* styles */ }
-.particle-explosion-button { /* styles */ }
+.3d-flip-button {
+  background: linear-gradient(45deg, #ff6b6b, #feca57);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
 
-/* Add any additional styles needed for button effects */
+.3d-flip-button.flipped {
+  transform: rotateY(180deg);
+}
+
+.animated-button {
+  background-color: #48dbfb;
+}
+
+.animated-button.clicked {
+  animation: pulse 1s;
+}
+
+.enhanced-freeze-fire-button, .freeze-fire-button {
+  background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+}
+
+.enhanced-freeze-fire-button.hover, .freeze-fire-button.hover {
+  background: linear-gradient(45deg, #3a7bd5, #00d2ff);
+}
+
+.glitch-button, .glitch-button2 {
+  background-color: #ff6b6b;
+}
+
+.glitch-button.glitch-effect, .glitch-button2.glitch-effect {
+  animation: glitch 0.3s infinite;
+}
+
+.liquid-button {
+  background-color: #54a0ff;
+  overflow: hidden;
+}
+
+.liquid-button.clicked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: ripple 2s linear;
+}
+
+.neon-button {
+  background-color: #1e272e;
+  color: #00d2ff;
+  box-shadow: 0 0 5px #00d2ff;
+}
+
+.neon-button.hover {
+  box-shadow: 0 0 20px #00d2ff;
+}
+
+.neon-flicker-button-push {
+  background-color: #1e272e;
+  color: #ff6b6b;
+  box-shadow: 0 0 5px #ff6b6b;
+}
+
+.neon-flicker-button-push.pushed {
+  animation: flicker 0.3s;
+}
+
+.particle-explosion-button {
+  background-color: #ff9ff3;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-5px, 5px); }
+  40% { transform: translate(-5px, -5px); }
+  60% { transform: translate(5px, 5px); }
+  80% { transform: translate(5px, -5px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes ripple {
+  to { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+}
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
