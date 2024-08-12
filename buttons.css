@@ -1,0 +1,32 @@
+/* buttons.css */
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+/* Add specific styles for each button type here */
+.3d-flip-button { /* styles */ }
+.animated-button { /* styles */ }
+.enhanced-freeze-fire-button { /* styles */ }
+.freeze-fire-button { /* styles */ }
+.glitch-button { /* styles */ }
+.glitch-button2 { /* styles */ }
+.liquid-button { /* styles */ }
+.neon-button { /* styles */ }
+.neon-flicker-button-push { /* styles */ }
+.particle-explosion-button { /* styles */ }
+
+/* Add any additional styles needed for button effects */
